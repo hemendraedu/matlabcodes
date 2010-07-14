@@ -1,8 +1,7 @@
 
 % Original: Zico Kolter (updated by Honglak Lee), Stanford
 % Implementing a linear SVM classifier for 
-% the binary classification problem using the data given.
-% load data given in problem set #1
+% the binary classification problem using CVX matlab package.
 
 load /Users/tcdoan/matlabcodes/data/q1x.dat
 load /Users/tcdoan/matlabcodes/data/q1y.dat
