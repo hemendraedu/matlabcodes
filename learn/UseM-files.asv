@@ -1,0 +1,6 @@
+GaussPlotScript   % call a script (no input and output arguments) in GaussPlotScript.m
+GaussFunc(2,1,4)  % call GaussFunc in GaussFunc.m. First line is function definition line, defining function name and order of input and output argument
+lookfor GaussFunc % invoke GaussFunc
+
+
+
