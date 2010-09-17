@@ -1,0 +1,23 @@
+function[]=MVAboxbank1
+% ----------------------------------------------------------------------------
+% EBook         mva
+% ----------------------------------------------------------------------------
+%  See_also     grbox grrot grmove createdisplay show setgopt
+% ----------------------------------------------------------------------------
+%   Macro       MVAboxbank1
+% ----------------------------------------------------------------------------
+%   Description  MVAboxbank1 computes Boxplots for the length (Variable 1) 
+%                of the genuine and forged banknotes from bank2.dat, 
+%                respectively
+% ----------------------------------------------------------------------------
+% 08.12.2006 Vladimir Georgescu
+
+ x=load('/home/vladimir.georgescu/MVA/data/bank2.dat');
+ x1=x(:,1);
+ s1=x1(1:100)
+ s2=x1(101:200)
+ title('Swiss Bank Notes')
+ boxplot([s1 s2],'labels',{'GENUINE','COUNTERFEIT'},'widths',0.5)
+ 
+ 
+ 

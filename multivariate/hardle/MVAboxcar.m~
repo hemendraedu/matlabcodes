@@ -1,0 +1,79 @@
+function[]=MVAboxcar()
+%; -----------------------------------------------------------------------
+%; EBook         mva
+%; -----------------------------------------------------------------------
+%;  See_also     grbox grrot grmove createdisplay show setgopt
+%; -----------------------------------------------------------------------
+%;   Macro       MVAboxcar
+%; -----------------------------------------------------------------------
+%;   Description  MVAboxcar computes Boxplots for the mileage (Variable 14) 
+%;                of US, Japanese and European cars from carc.dat, 
+%;                respectively
+%; -----------------------------------------------------------------------
+x = textread('/home/vladimir.georgescu/MVA/data/carc.dat','%s');
+
+
+cars = str2double(x)
+length(cars)
+i=1
+j=1
+%Extracting mileage for cars 1:74
+for i=1:length(cars)
+    if and(mod(i,14)==0,i<1037)
+        mileage(j)=cars(i-11)
+        j=j+1
+    end
+end
+
+%Extracting country code
+j=1
+for i=1:length(cars)
+    if and(mod(i,14)==0,i<1037)
+        country(j)=cars(i)
+        j=j+1
+    end
+end
+
+countusa=1
+countjapan=1
+counteu=1
+
+for i=1:74
+    if country(i)==1
+        usa(countusa)=mileage(i)
+        countusa=countusa+1
+    else if country(i) == 2
+            japan(countjapan) = mileage(i)
+            countjapan = countjapan + 1
+        else if country(i)==3
+                eu(counteu)=mileage(i)
+                counteu=counteu+1
+            end
+        end
+    end
+end
+
+%Displaying 3 boxplots that have
+usa=usa';
+japan=japan'; 
+eu=eu';
+
+ylim([11 41])
+hold on
+japan1=ones(length(usa),1).*NaN
+eu1=japan1;
+boxplot([usa japan1 eu1],'labels',{'US','JAPAN','EU'})
+axis 'auto x'
+axis manual
+ylim([11 41])
+title('Car Data')
+
+usa2=ones(length(japan),1).*NaN
+eu2=usa2;
+boxplot([usa2 japan eu2],'labels',{'US','JAPAN','EU'})
+
+usa3=ones(length(eu),1).*NaN
+japan3=usa3;
+boxplot([usa3 japan3 eu],'labels',{'US','JAPAN','EU'})
+
+

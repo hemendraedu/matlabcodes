@@ -1,0 +1,80 @@
+function[]=MVAhisbank1()
+% ----------------------------------------------------------------------------
+% EBook         mva
+% ----------------------------------------------------------------------------
+% Quantlet      MVAhisbank1
+% ----------------------------------------------------------------------------
+% Description   MVAhisbank1 computes 4 histograms for the diagonal of the 
+%               forged swiss bank notes ("bank2.dat"). The histograms are
+%               different w.r.t. their binwidth. 
+% ----------------------------------------------------------------------------
+% 11.12.2006 Vladimir Georgescu
+
+x=load('bank2.dat');      
+
+x=x(101:200,6);
+
+origin=137.78;
+last=141;
+
+y1 = origin:0.1:last;
+y2 = origin:0.2:last;
+y3 = origin:0.3:last;
+y4 = origin:0.4:last;
+y1
+prob=x/sum(x);
+p=sum(prob);
+
+subplot(2,2,1) 
+hist(x,y1)
+axis 'auto y'
+axis manual
+xlim([137.5 141])
+h = findobj(gca,'Type','patch');
+set(h,'FaceColor','w','EdgeColor','k')
+title('Swiss Bank Notes')
+xlabel('h = 0.1')
+ylabel('Diagonal')
+
+subplot(2,2,3)
+hist(x,y2)
+axis 'auto y'
+axis manual
+xlim([137.5 141])
+h = findobj(gca,'Type','patch');
+set(h,'FaceColor','w','EdgeColor','k')
+title('Swiss Bank Notes')
+xlabel('h = 0.2')
+ylabel('Diagonal')
+
+subplot(2,2,2)
+hist(x,y3)
+axis 'auto y'
+axis manual
+xlim([137.5 141])
+h = findobj(gca,'Type','patch');
+set(h,'FaceColor','w','EdgeColor','k')
+title('Swiss Bank Notes')
+xlabel('h = 0.3')
+ylabel('Diagonal')
+
+subplot(2,2,4)
+hist(x,y4)
+axis 'auto y'
+axis manual
+xlim([137.5 141])
+h = findobj(gca,'Type','patch');
+set(h,'FaceColor','w','EdgeColor','k')
+title('Swiss Bank Notes')
+xlabel('h = 0.4')
+ylabel('Diagonal')
+
+
+
+
+
+
+
+
+
+

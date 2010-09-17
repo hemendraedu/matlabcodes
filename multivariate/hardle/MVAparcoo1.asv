@@ -1,0 +1,32 @@
+function[]=MVAparcoo1()
+% ----------------------------------------------------------------------------
+% EBook          mva
+% ----------------------------------------------------------------------------
+% Quantlet       MVAparcoo1
+% ----------------------------------------------------------------------------
+% Description    MVAparcoo1 computes a parallel coordinate plot for the 
+%                observations 96-105 of the Swiss bank notes data ("bank2.dat").
+% ----------------------------------------------------------------------------
+% Author         Michal Benko
+% Edit           Vladimir Georgescu
+
+ x=load('bank2.dat');     
+ z=x(96:105,:);               % extracts observations 96-105
+ 
+ s=size(z);
+ 
+ minz=repmat(min(z),s(1,1),1);
+ maxmin=repmat(max(z)-min(z),s(1,1),1);
+ z=(z-minz)./(maxmin);       % standardizes the data     
+
+ lab=[repmat('    Genuine',s(1,1)/2,1) ; repmat('Counterfeit',s(1,1)/2,1)];
+ celllab = cellstr(lab);
+ lab
+ z
+ hold on
+ parallelcoords(z(1:5,:),'Group',lab(1:5))
+ parallelcoords(z(6:10),'Group',lab(6:10),'LineWidth',2,'Color','r')
+ xlabel('t')
+ ylabel('f96 - f105')
+ title('Parallel coordinate plot (Bank data)')
+ hold off

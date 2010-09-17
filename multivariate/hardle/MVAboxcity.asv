@@ -1,0 +1,69 @@
+function[]=MVAboxcity()
+%----------------------------------------------------------------------------
+% EBook         mva
+% ----------------------------------------------------------------------------
+%  See_also     fivenum grbox grrot createdisplay show setgopt
+% ----------------------------------------------------------------------------
+%   Macro       MVAboxcity
+% ----------------------------------------------------------------------------
+%   Description  MVAboxcity computes the Five Number Summary and a Boxplot 
+%                for 1st column of the dataset popul.dat 
+% -------------------------------------------------------------------------
+% 13.12.2006 Vladimir Georgescu
+[x1]=textread('popul.dat','%s')   %Path needs to be rewritten for each case     
+
+
+
+
+i=1;
+j=1;
+
+for i=1:length(x1)
+    if mod(i,2)>0 mod(i,2)<0
+        x2(j)=x1(i);
+        j=j+1;
+    end
+end
+population = str2double(x2)
+
+boxplot(population,'label',{'U.S. Cities'},'widths',0.5)
+title('Boxplot')
+
+
+numbers(1) = min(population)
+
+
+% Determining the 25% Quartile
+aux1 = mod(length(population),2);
+aux2 = round(length(population)/2);
+aux3 = (population(aux2)+population(aux2+1))/2;
+aux4 = (round(length(population)/2) + length(population))/2;
+aux5 = round(aux4)-1;
+aux6 = round(length(population)/4);
+if aux1>0
+        numbers(2) = (population(aux5)+population(aux5+1))/2
+else if aux1 ==0
+        numbers(2) = (population(length(population)/2) + length(population))/2
+    end
+end
+
+
+% Determining the median
+if aux1>0
+    numbers(3) = population(aux2)
+else if aux1 == 0
+    numbers(3) = population(aux3)
+    end
+end
+
+
+% Determining the 75% Quartile
+if aux1>0
+        numbers(4) = (population(aux6) + population(aux6 + 1))/2
+else if aux1 ==0
+        numbers(4) = population(round(length(population)/4)) 
+    end
+end
+   
+
+numbers(5) = max(population)

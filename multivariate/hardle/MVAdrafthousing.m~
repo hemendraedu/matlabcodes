@@ -1,0 +1,250 @@
+function[]=MVAdrafthousing()
+% ----------------------------------------------------------------------------
+% EBook         mva
+% ----------------------------------------------------------------------------
+%  See_also     plotsplom
+% ----------------------------------------------------------------------------
+%   Macro       MVAdrafthousing
+% ----------------------------------------------------------------------------
+%   Description  MVAdrafthousing plots scatterplot matrix for the Boston housing data
+% ----------------------------------------------------------------------------
+% 20.12.2006 Vladimir Georgescu
+
+x=load('/home/vladimir.georgescu/MVA/data/bostonh.dat');
+
+
+y=x(:,1:5);
+
+i=1;
+for i=1:length(x)
+    y(i,6)=x(i,14);
+end
+
+med=median(y(:,6))
+
+
+i=1;
+k=1;
+l=1;
+for i=1:length(y)
+    if y(i,6)<med
+        y1(k,:)=y(i,:)
+        k=k+1
+    else
+        y2(l,:)=y(i,:)
+        l=l+1
+    end
+end
+for i=2:6
+    for j=1:i-1 
+        subplot(6,6,(i-1)*6+j)
+            plot(y1(:,j),y1(:,i),'ok')
+            hold on
+   
+          
+            plot(y2(:,j),y2(:,i),'or')
+     
+        axis off
+    end
+end
+
+%Creating two vectors with the values of the 
+%variable 'X1' higher and repectively lower than the median
+
+
+k=1;
+l=1;
+i=1;
+for i=1:length(y)
+    if y(i,6)<med
+        low1(k)=y(i,1);
+         k=k+1   
+    else
+        hi1(l)=y(i,1);
+         l=l+1
+    end
+end
+
+
+%Plotting the boxplots for values<median, values>median respectively
+
+low1=low1';
+hi1=hi1'; 
+
+
+subplot(6,6,1)
+auxhi1=ones(length(low1),1).*NaN;
+boxplot([low1 auxhi1])
+auxlow1=ones(length(hi1),1).*NaN;
+hold on
+boxplot([auxlow1 hi1])
+ylim([4min(low1) max(hi1)])
+axis off
+
+%Creating two vectors with the values of the 
+%variable 'X2' higher and repectively lower than the median
+
+
+k=1;
+l=1;
+i=1;
+for i=1:length(y)
+    if y(i,6)<med
+        low2(k)=y(i,2);
+         k=k+1   
+    else
+        hi2(l)=y(i,2);
+         l=l+1
+    end
+end
+
+
+%Plotting the boxplots for values<median, values>median respectively
+
+low2=low2';
+hi2=hi2'; 
+
+
+subplot(6,6,8)
+auxhi2=ones(length(low2),1).*NaN;
+boxplot([low2 auxhi2])
+auxlow2=ones(length(hi2),1).*NaN;
+hold on
+boxplot([auxlow2 hi2])
+ylim([min(low2) max(hi2)])
+axis off
+
+%Creating two vectors with the values of the 
+%variable 'X3' higher and repectively lower than the median
+
+
+k=1;
+l=1;
+i=1;
+for i=1:length(y)
+    if y(i,6)<med
+        low3(k)=y(i,3);
+         k=k+1   
+    else
+        hi3(l)=y(i,3);
+         l=l+1
+    end
+end
+
+
+%Plotting the boxplots for values<median, values>median respectively
+
+low3=low3';
+hi3=hi3'; 
+
+
+subplot(6,6,15)
+auxhi3=ones(length(low3),1).*NaN;
+boxplot([low3 auxhi3])
+auxlow3=ones(length(hi3),1).*NaN;
+hold on
+boxplot([auxlow3 hi3])
+ylim([min(low3) max(hi3)])
+axis off
+
+%Creating two vectors with the values of the 
+%variable 'X4' higher and repectively lower than the median
+
+
+k=1;
+l=1;
+i=1;
+for i=1:length(y)
+    if y(i,6)<med
+        low4(k)=y(i,4);
+         k=k+1   
+    else
+        hi4(l)=y(i,4);
+         l=l+1
+    end
+end
+
+
+%Plotting the boxplots for values<median, values>median respectively
+
+low4=low4';
+hi4=hi4'; 
+
+
+subplot(6,6,22)
+auxhi4=ones(length(low4),1).*NaN;
+boxplot([low4 auxhi4])
+auxlow4=ones(length(hi4),1).*NaN;
+hold on
+boxplot([auxlow4 hi4])
+ylim([min(low4) max(hi4)])
+axis off
+
+%Creating two vectors with the values of the 
+%variable 'X5' higher and repectively lower than the median
+
+
+k=1;
+l=1;
+i=1;
+for i=1:length(y)
+    if y(i,6)<med
+        low5(k)=y(i,5);
+         k=k+1   
+    else
+        hi5(l)=y(i,5);
+         l=l+1
+    end
+end
+
+
+%Plotting the boxplots for values<median, values>median respectively
+
+low5=low5';
+hi5=hi5'; 
+
+
+subplot(6,6,29)
+auxhi5=ones(length(low5),1).*NaN;
+boxplot([low5 auxhi5])
+auxlow5=ones(length(hi5),1).*NaN;
+hold on
+boxplot([auxlow5 hi5])
+ylim([min(low5) max(hi5)])
+axis off
+
+
+%Creating two vectors with the values of the 
+%variable 'X14' higher and repectively lower than the median
+
+
+k=1;
+l=1;
+i=1;
+for i=1:length(y)
+    if y(i,6)<med
+        low14(k)=y(i,6);
+         k=k+1   
+    else
+        hi14(l)=y(i,6);
+         l=l+1
+    end
+end
+low14
+hi14
+
+%Plotting the boxplots for values<median, values>median respectively
+
+low14=low14';
+hi14=hi14'; 
+
+
+subplot(6,6,36)
+auxhi14=ones(length(low14),1).*NaN;
+boxplot([low14 auxhi14])
+auxlow14=ones(length(hi14),1).*NaN;
+hold on
+boxplot([auxlow14 hi14])
+ylim([min(low14) max(hi14)])
+axis off
+

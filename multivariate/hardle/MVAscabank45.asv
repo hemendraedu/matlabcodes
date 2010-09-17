@@ -1,0 +1,21 @@
+function[]=MVAscabank45()
+% ----------------------------------------------------------------------------
+% EBook         mva
+% ----------------------------------------------------------------------------
+%   Quantlet     MVAscabank45
+% ----------------------------------------------------------------------------
+%   Description  MVAscabank45 computes a two dimensional scatterplot of X4
+%   vs. X5 
+%                (upper inner frame vs. lower) of the Swiss bank notes data 
+%                ("bank2.dat")              
+% ----------------------------------------------------------------------------
+% 08.12.2006 Vladimir Georgescu
+
+
+x=load('bank2.dat');        
+x45=x(:,4:5);
+scatter(x45(:,1),x45(:,2),25,'k')
+title('Swiss bank notes')
+xlabel('X4')
+ylabel('X5')
+   

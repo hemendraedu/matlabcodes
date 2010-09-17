@@ -1,0 +1,54 @@
+function[]=MVAregpull()
+% ----------------------------------------------------------------------------
+% EBook         mva
+% ----------------------------------------------------------------------------
+%  See_also     matrix gls setmaskl setmaskp createdisplay show setgopt
+% ----------------------------------------------------------------------------
+%   Macro       MVAregpull
+% ----------------------------------------------------------------------------
+%   Description  MVAregpull computes a linear regression of sales (X1) on 
+%                price (X2) from the pullovers data set ("pullover.dat")
+% ----------------------------------------------------------------------------
+% 12.01.2007 Vladimir Georgescu
+
+x=load('C:/Programme/MDTech/XploRe Academic/data/mva/p.dat')   %Path needs to be rewritten for each case     
+x21=x(:,1:2)
+scatter(x21(:,2),x21(:,1),25,'k')
+title('Pullovers Data')
+   xlabel('Price (X2)')
+   ylabel('Sales (X1)')
+hold on
+
+y=x(:,1);
+for i=1:length(x)
+        x1(i,1)=1;
+        x1(i,2)=x(i,2)
+end
+x1
+y
+beta=regress(y,x1)
+beta
+for i=1:length(x)
+       d(i,1)=x1(i,2);
+       d(i,2)=y(i);
+end
+
+li=[min(d(:,1)) max(d(:,1))]
+
+for i=1:length(li)
+    aux(i,1)=1;
+    aux(i,2)=li(i);
+end
+
+aux2=aux*beta
+
+for i=1:length(li)
+    m(i,1)=li(i)
+    m(i,2)=aux2(i)
+end
+
+line(m(:,1),m(:,2),'Color','k')
+
+
+
+

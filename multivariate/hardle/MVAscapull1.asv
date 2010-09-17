@@ -1,0 +1,20 @@
+function[]=MVAscapull1()
+% ----------------------------------------------------------------------------
+% EBook         mva
+% ----------------------------------------------------------------------------
+%  See_also     
+% ----------------------------------------------------------------------------
+%   Macro       MVAscapull1
+% ----------------------------------------------------------------------------
+%   Description  MVAscapull 1 computes a two dimensional scatterplot of X2 (price)
+%   and X1 (sales) from the pullovers data set
+% ----------------------------------------------------------------------------
+% 08.12.2006 Vladimir Georgescu
+x=load('C:/Programme/MDTech/XploRe Academic/data/mva/pullover.dat')   %Path needs to be rewritten for each case     
+x21=x(:,1:2);
+scatter(x21(:,2),x21(:,1),25,'k')
+title('Pullovers Data')
+   xlabel('Price (X2)')
+   ylabel('Sales (X1)')
+
+ 
