@@ -7,11 +7,12 @@ function y = MyMedian(X)
 
 Y = sort(X);
 
-if length(X)/2 == round(length(X)/2-0.5) 
+if mod(length(X),2) == 0 
     %even number of entries
-    y = (Y(length(X)/2) + Y(length(X)/2 +1))/2;
+    y = ( Y(length(X)/2) + Y(length(X)/2 +1))/2;
 else 
     %odd number of elements
-    y = Y(round(length(X)/2) +1); %error
+    y = Y(round(length(X)/2)); %error
 end
+
 

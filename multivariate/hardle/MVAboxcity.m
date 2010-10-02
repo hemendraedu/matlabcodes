@@ -19,7 +19,7 @@
 %               Song Song
 % ---------------------------------------------------------------------
 
-x=load('cities.dat');
+x=load('city.dat');
 m1=mean(x);
 hold on
 boxplot(x,'Symbol','o','label',{'World Cities'},'widths',0.5)
