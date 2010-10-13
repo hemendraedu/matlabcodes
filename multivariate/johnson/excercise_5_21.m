@@ -15,11 +15,14 @@ S = cov(X);
 Sii = diag(S);
 
 % compute simultanoous T_square intervals at the level of 95% confidence
+% t_square_int_weight = 19.9199;
 t_square_int_weight = (p*(n-1)/(n-p)) * finv(.95,p,n-p);
 t_square_intervals(:,1) = X_bar - sqrt(t_square_int_weight)*sqrt(Sii/n);
 t_square_intervals(:,2) = X_bar + sqrt(t_square_int_weight)*sqrt(Sii/n);
 
 % compute Bonfferoni intervals at the level of 95% confidence
+%bonfferoni_int_weight = 2.8751;
+
 bonfferoni_int_weight = tinv(1-0.05/(2*p), n-1);
 bonfferoni_intervals(:,1) = X_bar - bonfferoni_int_weight*sqrt(Sii/n);
 bonfferoni_intervals(:,2) = X_bar + bonfferoni_int_weight*sqrt(Sii/n);
