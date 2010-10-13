@@ -47,6 +47,10 @@ X(21,1) = NaN;
 %Remove any rows containing NaNs from a matrix X.
 X(any(isnan(X),2),:) = [];
 
+% Can remove fater with 
+% X(9,:) = [];
+% X(21,:) = [];
+
 % Sii is list containing all variances Xi, i = 1,2,...,p. 
 Sii = diag(S);
 
@@ -56,7 +60,8 @@ t_square_intervals(:,1) = X_bar - sqrt(t_square_int_weight)*sqrt(Sii/n);
 t_square_intervals(:,2) = X_bar + sqrt(t_square_int_weight)*sqrt(Sii/n);
 
 % compute Bonfferoni intervals at the level of 95% confidence
-bonfferoni_int_weight = tinv(1-0.05/(2*p), n-1);
+%  bonfferoni_int_weight = 2.5736
+bonfferoni_int_weight = tinv(1-0.05/(2*p), n-1); 
 bonfferoni_intervals(:,1) = X_bar - bonfferoni_int_weight*sqrt(Sii/n);
 bonfferoni_intervals(:,2) = X_bar + bonfferoni_int_weight*sqrt(Sii/n);
 
