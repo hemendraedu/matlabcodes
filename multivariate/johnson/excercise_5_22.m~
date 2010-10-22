@@ -3,22 +3,16 @@ clear all;
 load T5-13.dat;
 
 X = T5_13;
-
-% n is number of observations,  p is number of features/variables
 [n,p] = size(X);
-
-% compute sample mean vector X_bar and sample covariance matrix S
 X_bar = mean(X)';
 S = cov(X);
 
-% Construct Q-Q plots of the marginal distribution of fuel, repair and
-% capital costs
+% Q-Q plots of the marginal distribution of fuel, repair and capital costs
 normplot(X(:,1));
 normplot(X(:,2));
 normplot(X(:,3));
 
-% Construct 3 possible scatter diagrams from pairs of observation on
-% different variables
+% scatter plots from pairs of observation on different variables
 plotmatrix(X);
 scatter(X(:,1),X(:,2), 'filled')
 scatter(X(:,1),X(:,3), 'r', 'filled')
@@ -30,8 +24,6 @@ scatter(X(:,2),X(:,3), 'r','x')
 
 % Create matrix of mean values by replicating the mean vector for n rows
 MeanMat = repmat(mean(X),n,1);
-
-% A matrix of std deviation values by replicating the std vector for n rows
 SigmaMat = repmat(std(X),n,1);
 
 % Create matrix of zeros and ones, ones indicate the location of outliers
@@ -55,6 +47,8 @@ X(any(isnan(X),2),:) = [];
 Sii = diag(S);
 
 % compute simultanoous T_square intervals at the level of 95% confidence
+%t_square_int_weight = 9.9790;
+
 t_square_int_weight = (p*(n-1)/(n-p)) * finv(.95,p,n-p);
 t_square_intervals(:,1) = X_bar - sqrt(t_square_int_weight)*sqrt(Sii/n);
 t_square_intervals(:,2) = X_bar + sqrt(t_square_int_weight)*sqrt(Sii/n);
