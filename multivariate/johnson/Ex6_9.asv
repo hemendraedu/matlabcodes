@@ -1,0 +1,33 @@
+% Excercise 6.9
+load Ex6_9.dat;
+X = Ex6_9;
+g = 3;
+nl_arr = [3 2 3];
+X_mean = mean(X(:,2:3))';
+
+% Compute B matrix;
+B = [0 0; 0 0];
+for l = 1:g
+    nl = nl_arr(l);
+    groupl_idx = find(X(:,1) == l);
+    Xl_mean = mean(X(groupl_idx,2:3))';
+    B = B + nl*(Xl_mean - X_mean)*(Xl_mean - X_mean)';
+end; 
+
+% Compute W matrix;
+W = [0 0; 0 0];
+for l = 1:g
+    nl = nl_arr(l);
+    groupl_idx = find(X(:,1) == l);
+    Sl = cov(X(groupl_idx,2:3));
+    W = W + (nl-1)*Sl;
+end;
+
+T = B + W;
+lambda = det(W)/det(T);
+
+% Using table 6.3, p.303, to compute the exact test statistics
+% Can use Barlette correction if n is large!
+test_stat = ((sum(nl_arr) - g - 1)/(g-1))*((1-sqrt(lambda))/sqrt(lambda));
+crit_value = 
+
