@@ -1,9 +1,10 @@
 data = load('T7-1.DAT');
+
 % use statistics toolbox
 
 
 
-% manual calculation 
+% compute statisticas manually to understand deeper
 [n,r] = size(data);
 r = r-1;
 Z = [ones(n,1), data(:,1:2)];
