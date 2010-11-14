@@ -1,28 +1,11 @@
 data = load('T7-1.DAT');
-
-% use statistics toolbox
-X = data(:,1:2);
-y = data(:,end);
-stats = regstats(y,X);
-f = anova(stats);  
-
-fprintf('\n');
-fprintf('%15s %10.4f %15s %10.4f \n','Root MSE', sqrt(stats.mse), 'R-square', stats.rsquare);
-fprintf('%42s %10.4f','Adj R-sq', stats.adjrsquare);
-fprintf('\n');
-
-t = estimate_parameters(stats);
-
-X = [ones(size(X,1)), X];
-[b,bint] = regress(y,X);
-
-
-% compute statisticas manually to understand deeper
 [n,r] = size(data);
 r = r-1;
+
+% compute statistics manually 
 Z = [ones(n,1), data(:,1:2)];
 Y = data(:,end);
-beta_hat = inv(Z'*Z)*Z'*Y;
+beta_hat = (Z'*Z)\Z'*Y;
 pred = Z*beta_hat;
 model_df = r;
 error_df = n-r-1;

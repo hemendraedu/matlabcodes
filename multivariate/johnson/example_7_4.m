@@ -1,29 +1,20 @@
 data = load('T7-1.DAT');
+[n,r] = size(data);
 
 % use statistics toolbox
+X = data(:,1:2);
+y = data(:,end);
+stats = regstats(y,X);
+f = anova(stats);  
 
+fprintf('\n');
+fprintf('%15s %10.4f %15s %10.4f \n','Root MSE', sqrt(stats.mse), 'R-square', stats.rsquare);
+fprintf('%42s %10.4f','Adj R-sq', stats.adjrsquare);
+fprintf('\n');
 
+t = estimate_parameters(stats);
 
-% compute statisticas manually to understand deeper
-[n,r] = size(data);
-r = r-1;
-Z = [ones(n,1), data(:,1:2)];
-Y = data(:,end);
-beta_hat = inv(Z'*Z)*Z'*Y;
-pred = Z*beta_hat;
-model_df = r;
-error_df = n-r-1;
-total_df = n-1;
-e_hat = Y - pred;
-s_sqr = e_hat'*e_hat/error_df;
-
-s = sqrt(s_sqr);
-beta_hat_var = diag(s_sqr*inv(Z'*Z));
-beta_std_err = sqrt(beta_hat_var); 
-
-ssr = (pred - mean(Y))'*(pred - mean(Y));   %regression sum of squares
-sse = e_hat'*e_hat;                         %residual (error) sum of squares
-sst = (Y-mean(Y))'*(Y-mean(Y));
-R_squared = 1 - sse/sst;
-adj_R_squared = 1- (sse/error_df)/(sst/total_df);
-
+X = [ones(n,1), X];
+[b,bint] = regress(y,X);
+fprintf('95 percent confidence intervals for coefficient estimates \n');
+disp(bint);
