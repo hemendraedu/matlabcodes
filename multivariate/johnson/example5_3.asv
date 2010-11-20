@@ -1,34 +1,44 @@
 % Example 5.3 - Constructing a confidence ellipse for mean vector mu
-load example_5_3; 
-
-% transform X1, X2 to near normality 
-X1_t = X1.^(1/4);
-X2_t = X2.^(1/4);
-
-% put X1_t, X2_t into a matrix X
-X = [X1_t, X2_t];
-
-% n is number of observations,  p is number of features/variables
+clear;
+mydata = load('example5_3.dat');
+X = mydata .^(1/4);
 [n,p] = size(X);
 
-% compute sample mean vector X_bar and sample covariance matrix S
-X_bar = mean(X)';
+X_mean = mean(X)';
 S = cov(X);
 S_inv = inv(S);
 
-% V store eigen-vectors , diagonal elements of D are eigen values
+% V store eigen-vectors , D are eigen values
 [V D] = eig(S);
+display(V); display(D);
+
+ellipse_center = X_mean;
+display(ellipse_center);
+
+% The direction and lengths of axes of ellipsoid
+%   n * (x.mean - mu)'*inv(S)*(x.mean - mu) 
+%       <= c^2 = [p(n-1)/(n-p)]*F(.95, p, n-p)     
+% are:
 
 % compute 95% confidence region
 critvalue = (p*(n-1)/(n-p)) * finv(.95,p,n-p);
 
+for i = 1:size(V,2)
+    lambda = D(i,i);
+    half_len = sqrt(lambda) * sqrt(critvalue);
+    fprintf('Axis %d, half-length = %10.4f, direction:  \n', i, half_len);
+    disp(V
+    
+end
+
+
 % Calculate T_sq to see if [.562, .589 ]' is in the confidence region?
 mu = [.562, .589 ]';
-T_sq = n*(X_bar-mu)'*S_inv*(X_bar-mu);
+T_sq = n*(X_mean-mu)'*S_inv*(X_mean-mu);
 
-if T_sq <= critvalue 
-    mu
-    sprintf('IN confidence region. T square = %%.2f. <= %.2f.', T_sq, critvalue)
+disp(mu);
+if T_sq <= critvalue  
+    sprintf('IN confidence region. T square = %.2f <= %.2f', T_sq, critvalue)
 else   
-    sprintf('NOT in confidence region. T square = %%.2f. > %.2f.', T_sq, critvalue);
-% As T_sq <= c_sq, we conclude [.562, .589 ]' is in the region
+    sprintf('NOT in confidence region. T square = %.2f > %.2f', T_sq, critvalue)
+end        
